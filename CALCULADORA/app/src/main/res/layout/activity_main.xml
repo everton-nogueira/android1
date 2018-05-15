@@ -31,9 +31,9 @@
         app:layout_constraintBottom_toTopOf="@+id/textMais"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textPercent"
+        app:layout_constraintStart_toEndOf="@+id/textDivisao"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textPercent"
@@ -43,27 +43,27 @@
         android:gravity="center_vertical|center_horizontal"
         android:text="%"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textNove"
-        app:layout_constraintEnd_toStartOf="@+id/textMenos"
+        app:layout_constraintBottom_toTopOf="@+id/textOito"
+        app:layout_constraintEnd_toStartOf="@+id/textDivisao"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textA"
+        app:layout_constraintStart_toEndOf="@+id/textAC"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
-        android:id="@+id/textA"
+        android:id="@+id/textDivisao"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/holo_orange_dark"
         android:gravity="center_vertical|center_horizontal"
-        android:text="A"
+        android:text="/"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textOito"
-        app:layout_constraintEnd_toStartOf="@+id/textPercent"
+        app:layout_constraintBottom_toTopOf="@+id/textNove"
+        app:layout_constraintEnd_toStartOf="@+id/textMenos"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textAC2"
+        app:layout_constraintStart_toEndOf="@+id/textPercent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textMais"
@@ -78,7 +78,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textNove"
         app:layout_constraintTop_toBottomOf="@+id/textMenos"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textNove"
@@ -92,8 +92,8 @@
         app:layout_constraintEnd_toStartOf="@+id/textMais"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textOito"
-        app:layout_constraintTop_toBottomOf="@+id/textPercent"
-        android:onClick="onClickButton"/>
+        app:layout_constraintTop_toBottomOf="@+id/textDivisao"
+        />
 
     <TextView
         android:id="@+id/textOito"
@@ -108,8 +108,8 @@
         app:layout_constraintEnd_toStartOf="@+id/textNove"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textSete"
-        app:layout_constraintTop_toBottomOf="@+id/textA"
-        android:onClick="onClickButton"/>
+        app:layout_constraintTop_toBottomOf="@+id/textPercent"
+        />
 
     <TextView
         android:id="@+id/textVezes"
@@ -124,7 +124,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textSeis"
         app:layout_constraintTop_toBottomOf="@+id/textMais"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textSeis"
@@ -139,7 +139,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textCinco"
         app:layout_constraintTop_toBottomOf="@+id/textNove"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textCinco"
@@ -154,7 +154,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textQuatro"
         app:layout_constraintTop_toBottomOf="@+id/textOito"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textRaiz"
@@ -169,7 +169,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textTres"
         app:layout_constraintTop_toBottomOf="@+id/textVezes"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textTres"
@@ -185,7 +185,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textDois"
         app:layout_constraintTop_toBottomOf="@+id/textSeis"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textDois"
@@ -201,7 +201,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textUm"
         app:layout_constraintTop_toBottomOf="@+id/textCinco"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textPonto"
@@ -216,7 +216,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@id/textTres"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textIgual"
@@ -231,7 +231,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textPonto"
         app:layout_constraintTop_toBottomOf="@id/textRaiz"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textZero"
@@ -245,7 +245,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textUm"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textUm"
@@ -260,7 +260,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textQuatro"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textQuatro"
@@ -275,7 +275,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textSete"
-        android:onClick="onClickButton"/>
+        />
 
     <TextView
         android:id="@+id/textSete"
@@ -289,11 +289,11 @@
         app:layout_constraintEnd_toStartOf="@+id/textOito"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textAC2"
-        android:onClick="onClickButton"/>
+        app:layout_constraintTop_toBottomOf="@+id/textAC"
+        />
 
     <TextView
-        android:id="@+id/textAC2"
+        android:id="@+id/textAC"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:width="2dp"
@@ -302,11 +302,10 @@
         android:text="AC"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textSete"
-        app:layout_constraintEnd_toStartOf="@+id/textA"
+        app:layout_constraintEnd_toStartOf="@+id/textPercent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:onClick="onClickButton"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
