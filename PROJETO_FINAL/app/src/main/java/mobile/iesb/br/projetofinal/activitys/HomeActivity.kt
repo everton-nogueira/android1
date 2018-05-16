@@ -1,18 +1,16 @@
 package mobile.iesb.br.projetofinal.activitys
 
-import android.arch.persistence.room.Room
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.*
 import android.widget.*
 import mobile.iesb.br.projetofinal.R
 import mobile.iesb.br.projetofinal.dao.AppDatabase
+import mobile.iesb.br.projetofinal.dao.FactoryDAO
 import mobile.iesb.br.projetofinal.entidade.Noticia
 import mobile.iesb.br.projetofinal.util.ResourcesUtil
 import java.util.*
@@ -28,10 +26,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        db = Room.databaseBuilder(
-                applicationContext,
-                AppDatabase::class.java, "room-database"
-        ).allowMainThreadQueries().build()
+        db = FactoryDAO.getConnection(applicationContext)
 
         var noticias = cadastraNoticia()
 

@@ -17,6 +17,7 @@ import mobile.iesb.br.projetofinal.util.ValidaUtil
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import kotlinx.android.synthetic.main.content_main.*
+import mobile.iesb.br.projetofinal.dao.FactoryDAO
 import mobile.iesb.br.projetofinal.util.ResourcesUtil
 import java.io.ByteArrayOutputStream
 
@@ -55,10 +56,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        db = Room.databaseBuilder(
-                applicationContext,
-                AppDatabase::class.java, "room-database"
-        ).allowMainThreadQueries().build()
+        db = FactoryDAO.getConnection(applicationContext)
 
         cadastraUsuario()
     }

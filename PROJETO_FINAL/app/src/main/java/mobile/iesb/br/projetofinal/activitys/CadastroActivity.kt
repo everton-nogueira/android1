@@ -10,6 +10,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.content_cadastro.*
 import mobile.iesb.br.projetofinal.R
 import mobile.iesb.br.projetofinal.dao.AppDatabase
+import mobile.iesb.br.projetofinal.dao.FactoryDAO
 import mobile.iesb.br.projetofinal.entidade.Usuario
 import mobile.iesb.br.projetofinal.util.ResourcesUtil
 import mobile.iesb.br.projetofinal.util.ValidaUtil
@@ -26,7 +27,7 @@ class CadastroActivity : AppCompatActivity() {
         buttonCadastrar.setOnClickListener {
             cadastraUsuario()
         }
-        db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "room-database").allowMainThreadQueries().build()
+        db = FactoryDAO.getConnection(applicationContext)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

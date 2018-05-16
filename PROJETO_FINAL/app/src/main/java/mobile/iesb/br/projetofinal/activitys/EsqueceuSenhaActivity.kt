@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import mobile.iesb.br.projetofinal.R
 import mobile.iesb.br.projetofinal.dao.AppDatabase
+import mobile.iesb.br.projetofinal.dao.FactoryDAO
 import mobile.iesb.br.projetofinal.util.ValidaUtil
 
 class EsqueceuSenhaActivity : AppCompatActivity() {
@@ -34,10 +35,7 @@ class EsqueceuSenhaActivity : AppCompatActivity() {
             }
         }
 
-        db = Room.databaseBuilder(
-                applicationContext,
-                AppDatabase::class.java, "room-database"
-        ).allowMainThreadQueries().build()
+        db = FactoryDAO.getConnection(applicationContext)
     }
 
     private fun isEmailExistente(): Boolean {

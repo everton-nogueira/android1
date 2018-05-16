@@ -21,6 +21,7 @@ import mobile.iesb.br.projetofinal.R
 import mobile.iesb.br.projetofinal.dao.AppDatabase
 import mobile.iesb.br.projetofinal.util.ValidaUtil
 import kotlinx.android.synthetic.main.content_editar_perfil.*;
+import mobile.iesb.br.projetofinal.dao.FactoryDAO
 import mobile.iesb.br.projetofinal.entidade.Usuario
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -47,11 +48,7 @@ class EditarPerfilActivity : AppCompatActivity() {
             finish()
         }
 
-
-        db = Room.databaseBuilder(
-                applicationContext,
-                AppDatabase::class.java, "room-database"
-        ).allowMainThreadQueries().build()
+        db = FactoryDAO.getConnection(applicationContext)
 
         var sessao = getSharedPreferences("username", Context.MODE_PRIVATE)
         var email = sessao.getString("emailLogin", " ")
