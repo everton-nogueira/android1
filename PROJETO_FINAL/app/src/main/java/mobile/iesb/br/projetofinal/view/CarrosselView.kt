@@ -14,32 +14,31 @@ class CarrosselView @JvmOverloads constructor(
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
 
-    val tempoCarrossel: Long = 4000
-    var imagens = intArrayOf(R.drawable.notici, R.drawable.ponto1, R.drawable.ponto2)
-    var contador: Int = 0
+    val timeMillisLoop: Long = 2500
+    var imagens = intArrayOf(R.drawable.noticia, R.drawable.noticia2, R.drawable.noticia3)
+    var index: Int = 0
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
         var paint = Paint()
-        val bmp = BitmapFactory.decodeResource(resources, imagens[contador])
+        val bmp = BitmapFactory.decodeResource(resources, imagens[index])
         val matrix = Matrix()
 
         var escalaX: Float = width.toFloat() / bmp.width.toFloat()
         var escalaY: Float = height.toFloat() / bmp.height.toFloat()
 
         matrix.postScale(escalaX, escalaY)
-        val dstbmp = Bitmap.createBitmap(bmp, 0, 0, bmp.width, bmp.height, matrix, true)
+        val imagemBitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.width, bmp.height, matrix, true)
         canvas.drawColor(Color.TRANSPARENT)
 
-        canvas.drawBitmap(dstbmp, 0f, 0f, paint)
+        canvas.drawBitmap(imagemBitmap, 0f, 0f, paint)
 
-        postInvalidateDelayed(tempoCarrossel)
+        postInvalidateDelayed(timeMillisLoop)
 
-        if (contador == 2) {
-            contador = 0
-        } else {
-            contador += 1
+        index++
+        if (index >= imagens.size) {
+            index = 0
         }
     }
 }
