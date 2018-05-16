@@ -3,24 +3,25 @@ package mobile.iesb.br.projetofinal.activitys
 import android.arch.persistence.room.Room
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import android.support.v4.view.PagerAdapter
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.*
 import android.widget.*
 import mobile.iesb.br.projetofinal.R
 import mobile.iesb.br.projetofinal.dao.AppDatabase
 import mobile.iesb.br.projetofinal.entidade.Noticia
-import java.io.ByteArrayOutputStream
+import mobile.iesb.br.projetofinal.util.ResourcesUtil
 import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 
-    var db: AppDatabase? = null
-    val TEXTO = "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker."
+    private var db: AppDatabase? = null
+    private var TEXTO = "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker."
+    private var QTD_NOTICIAS = 10
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +33,6 @@ class HomeActivity : AppCompatActivity() {
                 AppDatabase::class.java, "room-database"
         ).allowMainThreadQueries().build()
 
-
         var noticias = cadastraNoticia()
 
         val listView = findViewById<ListView>(R.id.listNoticias)
@@ -43,25 +43,24 @@ class HomeActivity : AppCompatActivity() {
             startActivity(myIntent)
         }
 
-    }
-
-    public override fun onDestroy() {
-        super.onDestroy()
+        var resources = intArrayOf(R.drawable.noticia, R.drawable.noticia2, R.drawable.noticia3)
+        findViewById<ViewPager>(R.id.carrosselView).adapter = CustomPagerAdapter(this, resources)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.editarPerfil -> {
                 val myIntent = Intent(this, EditarPerfilActivity::class.java)
+                startActivity(myIntent)
+                true
+            }
+            R.id.sair -> {
+                val myIntent = Intent(this, MainActivity::class.java)
                 startActivity(myIntent)
                 true
             }
@@ -74,40 +73,17 @@ class HomeActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun cadastraNoticia(): List<Noticia>? {
         var noticias = db?.noticiaDao()?.findAll()
-
         if (noticias?.size == 0) {
-
-            db?.noticiaDao()?.insertNoticia(Noticia(0, "Titulo1", Date(), TEXTO, getImagem()))
-            db?.noticiaDao()?.insertNoticia(Noticia(0, "Titulo2", Date(), TEXTO, getImagem()))
-            db?.noticiaDao()?.insertNoticia(Noticia(0, "Titulo3", Date(), TEXTO, getImagem()))
-            db?.noticiaDao()?.insertNoticia(Noticia(0, "Titulo4", Date(), TEXTO, getImagem()))
-            db?.noticiaDao()?.insertNoticia(Noticia(0, "Titulo5", Date(), TEXTO, getImagem()))
-            db?.noticiaDao()?.insertNoticia(Noticia(0, "Titulo6", Date(), TEXTO, getImagem()))
-            db?.noticiaDao()?.insertNoticia(Noticia(0, "Titulo7", Date(), TEXTO, getImagem()))
-            db?.noticiaDao()?.insertNoticia(Noticia(0, "Titulo8", Date(), TEXTO, getImagem()))
-            db?.noticiaDao()?.insertNoticia(Noticia(0, "Titulo9", Date(), TEXTO, getImagem()))
-            db?.noticiaDao()?.insertNoticia(Noticia(0, "Titulo10", Date(), TEXTO, getImagem()))
-
+            for(i in 0 .. QTD_NOTICIAS){
+                db?.noticiaDao()?.insertNoticia(Noticia(0, "Titulo "+i, Date(), TEXTO, ResourcesUtil.getImagem(resources, R.drawable.noticia)))
+            }
             noticias = db?.noticiaDao()?.findAll()
         }
-
         return noticias?.sortedByDescending { it.uid }
     }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getImagem(): String{
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.noticia)
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
-        val base64 = android.util.Base64.encodeToString(stream.toByteArray(), android.util.Base64.DEFAULT)
-        bitmap.recycle()
-        return base64
-    }
-
 }
 
 private class NoticiaListAdapter(paramContexto: Context, paramNoticias: List<Noticia>) : BaseAdapter() {
-
     private val contexto: Context
     private var noticias: List<Noticia>
 
@@ -146,4 +122,43 @@ private class NoticiaListAdapter(paramContexto: Context, paramNoticias: List<Not
 
         return noticiaRow
     }
+}
+
+class CustomPagerAdapter(val context: Context, resources: IntArray) : PagerAdapter() {
+
+    private var mContext: Context
+    private var mLayoutInflater: LayoutInflater
+    private var mResources: IntArray
+
+    init {
+        mContext = context
+        mResources = resources
+        mLayoutInflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    }
+
+    override fun isViewFromObject(view: View?, `object`: Any?): Boolean {
+        return view == `object` as LinearLayout
+    }
+
+    override fun getCount(): Int {
+        return mResources.size
+    }
+
+
+    override fun instantiateItem(container: ViewGroup?, position: Int): Any {
+        var itemView: View = mLayoutInflater.inflate(R.layout.content_page_item, container, false)
+
+        var imageView: ImageView = itemView.findViewById(R.id.imageViewPageItem) as ImageView
+        imageView.setImageResource(mResources[position])
+
+        container?.addView(itemView)
+
+        return itemView
+    }
+
+    override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
+        container?.removeView(`object` as LinearLayout)
+
+    }
+
 }
